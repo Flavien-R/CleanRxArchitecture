@@ -4,40 +4,48 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'com.adarshr.test-logger'
 
-android {
-    compileSdkVersion androidCompileSdkVersion
-    defaultConfig {
-        minSdkVersion androidMinSdkVersion
-        testInstrumentationRunner packageAndroidJUnitRunner
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    buildTypes {
-        debug {
-            minifyEnabled true
-            consumerProguardFiles modelRules, supportRules, apacheRules, gsonRules, okhttp3Rules, retrofit2Rules, stethoRules
-        }
-        release {
-            minifyEnabled true
-            consumerProguardFiles modelRules, supportRules, apacheRules, gsonRules, okhttp3Rules, retrofit2Rules, stethoRules
-        }
-        // For Android Test
-        debugTest {
-            initWith(debug)
-            minifyEnabled false
-        }
-        testBuildType 'debugTest'
-    }
+apply plugin: 'com.asi.appPhenix'
+apply plugin: 'com.asi.libPhenix'
+
+maConf {
+    jacocoEnable = false
 }
+
+//android {
+//    compileSdkVersion androidCompileSdkVersion
+//    defaultConfig {
+//        minSdkVersion androidMinSdkVersion
+//        testInstrumentationRunner packageAndroidJUnitRunner
+//    }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
+//    buildTypes {
+//        debug {
+//            minifyEnabled true
+//            consumerProguardFiles modelRules, supportRules, apacheRules, gsonRules, okhttp3Rules, retrofit2Rules, stethoRules
+//        }
+//        release {
+//            minifyEnabled true
+//            consumerProguardFiles modelRules, supportRules, apacheRules, gsonRules, okhttp3Rules, retrofit2Rules, stethoRules
+//        }
+//        // For Android Test
+//        debugTest {
+//            initWith(debug)
+//            minifyEnabled false
+//        }
+//        testBuildType 'debugTest'
+//    }
+//}
 
 dependencies {
     // MODULE
     implementation project(':domain')
 
     // KOTLIN
-    implementation kotlinStdlib
+//    implementation kotlinStdlib
+    implementation libs.androidLibs.KOTLIN
     // SUPPORT
     implementation androidXCore
     // COMPONENTS
@@ -75,3 +83,5 @@ dependencies {
     // DEPENDENCY CHECK STRATEGY
     dependencyUpdates.resolutionStrategy = dependencyUpdatesStrategy
 }
+
+
